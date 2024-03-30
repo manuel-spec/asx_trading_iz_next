@@ -20,7 +20,7 @@ const CoinModal = ({ open, onClose, children, data, name }) => {
         />
       )}
       {!openModal && (
-        <div className="flex justify-between mt-15">
+        <div className="flex justify-between">
           <div className="ml-4 sm:ml-10">
             <button
               onClick={onClose}
