@@ -19,7 +19,7 @@ const Header = (props: {
               }}
               className="z-99999 block rounded-sm border-stroke p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
             >
-              <TbApps style={{ color: '#000000' }} />
+              <TbApps style={{ color: '#000000', fontSize: 20 }} />
             </button>
           </div>
           {/* <!-- Hamburger Toggle BTN --> */}
