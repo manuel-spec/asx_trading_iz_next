@@ -243,7 +243,7 @@ const Account = () => {
                         item.symbol.toUpperCase() + 'Balance'
                       ].toFixed(3)
                     : '0.00'}{' '}
-                  {item.symbol}
+                  {item.symbol.toUpperCase()}
                 </p>
               </div>
             </div>

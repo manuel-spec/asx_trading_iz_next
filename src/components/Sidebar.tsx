@@ -67,18 +67,23 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   });
 
   const [uid, setUid] = useState('');
-  Axios.get(`https://test.safepauleni.site/api/users/${address}`)
-    .then((response) => {
-      const id = response.data['_id'];
-      const shortenedId = id.substring(0, 5); // Get the first 5 characters of the ID
-      setUid(shortenedId);
-    })
-    .catch((error) => {
-      console.error(
-        'Error fetching user:',
-        error.response ? error.response.data : error.message,
-      );
-    });
+
+  useEffect(() => {
+    Axios.get(`https://test.safepauleni.site/api/users/${address}`)
+      .then((response) => {
+        const id = response.data['_id'];
+
+        localStorage.setItem('id', id);
+        const shortenedId = id.substring(0, 5); // Get the first 5 characters of the ID
+        setUid(shortenedId);
+      })
+      .catch((error) => {
+        console.error(
+          'Error fetching user:',
+          error.response ? error.response.data : error.message,
+        );
+      });
+  }, []);
 
   return (
     <aside
