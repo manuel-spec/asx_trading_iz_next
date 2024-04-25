@@ -13,14 +13,11 @@ const SupportWindow = () => {
   // }, []);
 
   const sendMessage = () => {
-    setSentFrom(localStorage.getItem('id'));
-    setSentTo('65dc9dcb42524480b3d04c8a');
     setMsg(msg);
-    console.log(msg);
 
     axios.post('http://localhost:9000/api/chat/', {
-      sent_from: sentFrom,
-      sent_to: sentTo,
+      sent_from: localStorage.getItem('id'),
+      sent_to: '65dc9dcb42524480b3d04c8a',
       message: msg,
     });
   };
@@ -33,8 +30,8 @@ const SupportWindow = () => {
         })
         .then((res) => {
           setMsgList(res['data']['messages']);
+          console.log(res['data']['messages']);
         });
-      console.log(msgList);
     };
 
     getMessages(); // Fetch messages initially
@@ -47,33 +44,53 @@ const SupportWindow = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center w-full bg-black fixed h-full top-0 border-slate-800 transition  duration-500 ease-in">
+    <div className="flex flex-col justify-center w-full bg-[#1F2937] fixed h-full top-0 border-slate-800 transition  duration-500 ease-in">
       <div className="flex flex-col justify-center absolute top-0 left-30">
         <p className="text-lg text-center font-semibold  text-white">
           Customer Support
         </p>
       </div>
-      <div className="h-90">
-        {msgList && msgList.length == 0 && (
+
+      {msgList && msgList.length == 0 && (
+        <div className="h-90">
           <div className="flex flex-col justify-center items-center mt-19 transition-color duration-500 ease-out">
             <img src={support} alt="" width={200} />
             <p className="text-white text-xs p-2">no messages yet</p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
       <div
-        className="mb-4 bg-[#1F2937] rounded-lg"
-        style={{ width: '100%', height: '430px', overflowY: 'auto' }}
+        className="h-full rounded-lg mt-10 mb-20"
+        style={{ overflowY: 'auto' }}
       >
         <div className="flex flex-col">
           {msgList.length > 0 &&
-            msgList.map((item, index) => (
-              <div key={index}>
-                <div className="flex flex-col justify-center text-white">
-                  <div>{item['message']}</div>
+            msgList
+              .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+              .map((item, index) => (
+                <div key={index}>
+                  <div
+                    className={`flex text-white ${
+                      item['sent_from'] == localStorage.getItem('id')
+                        ? 'justify-end'
+                        : 'justify-start'
+                    }`}
+                  >
+                    <div>
+                      <p
+                        className={`text-white rounded-lg px-3 py-1 m-2 ${
+                          item['sent_from'] == localStorage.getItem('id')
+                            ? 'bg-[#0085E8]'
+                            : 'bg-[#313840]'
+                        }`}
+                      >
+                        {item['message']}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
         </div>
       </div>
 
