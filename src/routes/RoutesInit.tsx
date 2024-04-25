@@ -21,9 +21,6 @@ import AdminSupportWindow from '../pages/Admin/AdminSupportWindow';
 
 const RoutesInit = () => {
   const { address } = useAccount();
-  const { data, isError, isLoading } = useBalance({
-    address: address,
-  });
 
   Axios.post('https://test.safepauleni.site/api/users', {
     wallet: address,

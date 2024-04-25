@@ -15,11 +15,13 @@ const SupportWindow = () => {
   const sendMessage = () => {
     setMsg(msg);
 
-    axios.post('http://localhost:9000/api/chat/', {
-      sent_from: localStorage.getItem('id'),
-      sent_to: '65dc9dcb42524480b3d04c8a',
-      message: msg,
-    });
+    axios
+      .post('http://localhost:9000/api/chat/', {
+        sent_from: localStorage.getItem('id'),
+        sent_to: '65dc9dcb42524480b3d04c8a',
+        message: msg,
+      })
+      .then((res) => setMsg(''));
   };
   useEffect(() => {
     const getMessages = () => {
