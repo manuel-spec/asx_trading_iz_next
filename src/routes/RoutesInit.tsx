@@ -15,6 +15,9 @@ import {
 } from 'wagmi';
 import SignIn from '../pages/Admin/SignIn';
 import Admin from '../pages/Admin/admin';
+import Support from '../pages/Admin/Support';
+import SupportWindow from '../components/Modal/SupportWindow';
+import AdminSupportWindow from '../pages/Admin/AdminSupportWindow';
 
 const RoutesInit = () => {
   const { address } = useAccount();
@@ -43,6 +46,8 @@ const RoutesInit = () => {
       <Routes>
         <Route path="auth/signin" element={<SignIn />} />
         <Route path="admin/admin" element={<Admin />} />
+        <Route path="admin/chat" element={<Support />} />
+        <Route path="admin/chat/now" element={<AdminSupportWindow />} />
         <Route element={<DefaultLayout />}>
           <Route index element={<ECommerce />} />
           <Route index element={<ECommerce />} />

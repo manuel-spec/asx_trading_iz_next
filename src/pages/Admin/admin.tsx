@@ -13,12 +13,13 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 600,
-
+  width: 500,
   bgcolor: 'background.paper',
   border: '2px solid #fff',
   boxShadow: 24,
   p: 4,
+  overflowY: 'auto',
+  overflowX: 'auto',
 };
 
 const Admin = () => {
@@ -163,7 +164,7 @@ const Admin = () => {
     <div>
       <div className="flex">
         <div className="flex flex-row bg-[#2850E7] w-full p-4 text-white">
-          <button onClick={() => navigate('admin/chat')} className="ml-5">
+          <button onClick={() => navigate('/admin/chat')} className="ml-5">
             Support
           </button>
           <button onClick={logout} className="ml-5 text-red">
@@ -172,7 +173,7 @@ const Admin = () => {
 
           <div className="flex-1">
             <input
-              className="ml-3 rounded py-2 px-3  text-black focus:outline-none focus:shadow-outline"
+              className="ml-3 rounded py-2 px-3 text-black focus:outline-none"
               placeholder="wallet address"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -181,9 +182,14 @@ const Admin = () => {
         </div>
         <div></div>
       </div>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <tbody>
+            <tr className="">
+              <th className="px-10 font-semibold ">Id</th>
+              <th className="px-10 font-semibold ">Wallet Address</th>
+              <th className="px-10 font-semibold ">USDT Balance</th>
+            </tr>
             {filteredUsers.map((user) => (
               <tr className="dark:border-gray-700" key={user._id}>
                 <td className="px-6 py-4">
@@ -230,241 +236,240 @@ const Admin = () => {
                         <IoArrowBack />
                       </button>
                     </div>
-                    <div className="text-center">
-                      <form>
-                        <div>
-                          profit
-                          <button
-                            className="shadow p-3 bg-[#37F713] mr-3 px-4"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setProfitUp(user.walletAddress);
-                            }}
-                          >
-                            on
-                          </button>
-                          <button
-                            className="shadow p-3 bg-[#FF0000] px-4"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setProfitDown(user.walletAddress);
-                            }}
-                          >
-                            off
-                          </button>
-                        </div>
-                        <Typography
-                          id="modal-modal-title"
-                          variant="h6"
-                          component="h2"
-                        >
-                          User Id: {user._id}
-                        </Typography>
-                        <Typography
-                          id="modal-modal-title"
-                          variant="h6"
-                          component="h2"
-                        >
-                          User walletAddress: {user.walletAddress}
-                        </Typography>
-                        <div>
-                          <label htmlFor="demoBalance">Demo Balance:</label>
-                          <input
-                            type="text"
-                            id="demoBalance"
-                            value={user.DemoBalance}
-                            onChange={(e) => setDemoBalance(e.target.value)}
-                            className="shadow border-1 rounded-lg mt-1 text-center"
-                          />
-                          <button
-                            className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
-                            onClick={() =>
-                              handleBalanceUpdate(
-                                demoBalance,
-                                'DemoBalance',
-                                event,
-                                user.walletAddress,
-                              )
-                            }
-                          >
-                            Update
-                          </button>
-                        </div>
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '430px',
+                      }}
+                    >
+                      <div className="text-center text-sm">
+                        <form>
+                          <div>
+                            <div className="mb-5">
+                              <p className="text-sm">Id: {user._id}</p>
+                              <p className="text-sm">{user.walletAddress}</p>
+                            </div>
 
-                        <div>
-                          <label htmlFor="USDTPrice">USDT Balance:</label>
-                          <input
-                            type="text"
-                            id="USDTPrice"
-                            value={
-                              USDTPrice == 0 ? user.USDTBalance : USDTPrice
-                            }
-                            onChange={(e) => setUSDTPrice(e.target.value)}
-                            className="shadow border-1 rounded-lg mt-1 text-center"
-                          />
-                          <button
-                            className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
-                            onClick={() =>
-                              handleBalanceUpdate(
-                                USDTPrice,
-                                'USDTBalance',
-                                event,
-                                user.walletAddress,
-                              )
-                            }
-                          >
-                            Update
-                          </button>
-                        </div>
+                            <span className="p-2 text-sm">profit:</span>
+                            <button
+                              className="shadow bg-[#37F713] mr-3 px-6 py-2 text-white rounded"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setProfitUp(user.walletAddress);
+                              }}
+                            >
+                              on
+                            </button>
+                            <button
+                              className="shadow bg-[#FF0000] py-2 px-6 text-white rounded"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setProfitDown(user.walletAddress);
+                              }}
+                            >
+                              off
+                            </button>
+                          </div>
 
-                        <div>
-                          <label htmlFor="BTCPrice">BTC Balance:</label>
-                          <input
-                            type="text"
-                            id="BTCPrice"
-                            value={BTCPrice == 0 ? user.BTCBalance : BTCPrice}
-                            onChange={(e) => {
-                              setBTCPrice(e.target.value);
-                            }}
-                            className="shadow border-1 rounded-lg mt-1 text-center"
-                          />
-                          <button
-                            className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
-                            onClick={() =>
-                              handleBalanceUpdate(
-                                BTCPrice,
-                                'BTCBalance',
-                                event,
-                                user.walletAddress,
-                              )
-                            }
-                          >
-                            Update
-                          </button>
-                        </div>
+                          <div>
+                            <label htmlFor="demoBalance">Demo Balance:</label>
+                            <input
+                              type="text"
+                              id="demoBalance"
+                              value={user.DemoBalance}
+                              onChange={(e) => setDemoBalance(e.target.value)}
+                              className="shadow border-1 rounded-lg mt-1 text-center"
+                            />
+                            <button
+                              className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
+                              onClick={() =>
+                                handleBalanceUpdate(
+                                  demoBalance,
+                                  'DemoBalance',
+                                  event,
+                                  user.walletAddress,
+                                )
+                              }
+                            >
+                              Update
+                            </button>
+                          </div>
 
-                        <div>
-                          <label htmlFor="ETHPrice">ETH Balance:</label>
-                          <input
-                            type="text"
-                            id="ETHPrice"
-                            value={ETHPrice == 0 ? user.ETHBalance : ETHPrice}
-                            onChange={(e) => setEthPrice(e.target.value)}
-                            className="shadow border-1 rounded-lg mt-1 text-center"
-                          />
-                          <button
-                            className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
-                            onClick={() =>
-                              handleBalanceUpdate(
-                                ETHPrice,
-                                'ETHBalance',
-                                event,
-                                user.walletAddress,
-                              )
-                            }
-                          >
-                            Update
-                          </button>
-                        </div>
+                          <div>
+                            <label htmlFor="USDTPrice">USDT Balance:</label>
+                            <input
+                              type="text"
+                              id="USDTPrice"
+                              value={
+                                USDTPrice == 0 ? user.USDTBalance : USDTPrice
+                              }
+                              onChange={(e) => setUSDTPrice(e.target.value)}
+                              className="shadow  rounded-lg mt-1 text-center py-2 ml-2 mr-2"
+                            />
+                            <button
+                              className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
+                              onClick={() =>
+                                handleBalanceUpdate(
+                                  USDTPrice,
+                                  'USDTBalance',
+                                  event,
+                                  user.walletAddress,
+                                )
+                              }
+                            >
+                              Update
+                            </button>
+                          </div>
 
-                        <div>
-                          <label htmlFor="BNBPrice">BNB Balance:</label>
-                          <input
-                            type="text"
-                            id="BNBPrice"
-                            value={BNBPrice == 0 ? user.BNBBalance : BNBPrice}
-                            onChange={(e) => setBNBPrice(e.target.value)}
-                            className="shadow border-1 rounded-lg mt-1 text-center"
-                          />
-                          <button
-                            className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
-                            onClick={() =>
-                              handleBalanceUpdate(
-                                BNBPrice,
-                                'BNBBalance',
-                                event,
-                                user.walletAddress,
-                              )
-                            }
-                          >
-                            Update
-                          </button>
-                        </div>
+                          <div className="mt-3">
+                            <label htmlFor="BTCPrice">BTC Balance:</label>
+                            <input
+                              type="text"
+                              id="BTCPrice"
+                              value={BTCPrice == 0 ? user.BTCBalance : BTCPrice}
+                              onChange={(e) => {
+                                setBTCPrice(e.target.value);
+                              }}
+                              className="shadow rounded-lg mt-1 text-center py-2 ml-2 mr-2"
+                            />
+                            <button
+                              className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
+                              onClick={() =>
+                                handleBalanceUpdate(
+                                  BTCPrice,
+                                  'BTCBalance',
+                                  event,
+                                  user.walletAddress,
+                                )
+                              }
+                            >
+                              Update
+                            </button>
+                          </div>
 
-                        <div>
-                          <label htmlFor="ADAPrice">ADA Balance:</label>
-                          <input
-                            type="text"
-                            id="ADAPrice"
-                            value={ADAPrice == 0 ? user.ADABalance : ADAPrice}
-                            onChange={(e) => setADAPrice(e.target.value)}
-                            className="shadow border-1 rounded-lg mt-1 text-center"
-                          />
-                          <button
-                            className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
-                            onClick={() =>
-                              handleBalanceUpdate(
-                                ADAPrice,
-                                'ADABalance',
-                                event,
-                                user.walletAddress,
-                              )
-                            }
-                          >
-                            Update
-                          </button>
-                        </div>
+                          <div>
+                            <label htmlFor="ETHPrice">ETH Balance:</label>
+                            <input
+                              type="text"
+                              id="ETHPrice"
+                              value={ETHPrice == 0 ? user.ETHBalance : ETHPrice}
+                              onChange={(e) => setEthPrice(e.target.value)}
+                              className="shadow border-1 rounded-lg mt-1 text-center"
+                            />
+                            <button
+                              className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
+                              onClick={() =>
+                                handleBalanceUpdate(
+                                  ETHPrice,
+                                  'ETHBalance',
+                                  event,
+                                  user.walletAddress,
+                                )
+                              }
+                            >
+                              Update
+                            </button>
+                          </div>
 
-                        <div>
-                          <label htmlFor="DOGEPrice">DOGE Balance:</label>
-                          <input
-                            type="text"
-                            id="DOGEPrice"
-                            value={
-                              DOGEPrice == 0 ? user.DOGEBalance : DOGEPrice
-                            }
-                            onChange={(e) => setDOGEPrice(e.target.value)}
-                            className="shadow border-1 rounded-lg mt-1 text-center"
-                          />
-                          <button
-                            className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
-                            onClick={() =>
-                              handleBalanceUpdate(
-                                DOGEPrice,
-                                'DOGEBalance',
-                                event,
-                                user.walletAddress,
-                              )
-                            }
-                          >
-                            Update
-                          </button>
-                        </div>
+                          <div>
+                            <label htmlFor="BNBPrice">BNB Balance:</label>
+                            <input
+                              type="text"
+                              id="BNBPrice"
+                              value={BNBPrice == 0 ? user.BNBBalance : BNBPrice}
+                              onChange={(e) => setBNBPrice(e.target.value)}
+                              className="shadow border-1 rounded-lg mt-1 text-center"
+                            />
+                            <button
+                              className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
+                              onClick={() =>
+                                handleBalanceUpdate(
+                                  BNBPrice,
+                                  'BNBBalance',
+                                  event,
+                                  user.walletAddress,
+                                )
+                              }
+                            >
+                              Update
+                            </button>
+                          </div>
 
-                        <div>
-                          <label htmlFor="SOLPrice">SOL Balance:</label>
-                          <input
-                            type="text"
-                            id="SOLPrice"
-                            value={SOLPrice == 0 ? user.SOLBalance : SOLPrice}
-                            onChange={(e) => setSOLPrice(e.target.value)}
-                            className="shadow border-1 rounded-lg mt-1 text-center"
-                          />
-                          <button
-                            className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
-                            onClick={() =>
-                              handleBalanceUpdate(
-                                SOLPrice,
-                                'SOLBalance',
-                                event,
-                                user.walletAddress,
-                              )
-                            }
-                          >
-                            Update
-                          </button>
-                        </div>
-                      </form>
+                          <div>
+                            <label htmlFor="ADAPrice">ADA Balance:</label>
+                            <input
+                              type="text"
+                              id="ADAPrice"
+                              value={ADAPrice == 0 ? user.ADABalance : ADAPrice}
+                              onChange={(e) => setADAPrice(e.target.value)}
+                              className="shadow border-1 rounded-lg mt-1 text-center"
+                            />
+                            <button
+                              className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
+                              onClick={() =>
+                                handleBalanceUpdate(
+                                  ADAPrice,
+                                  'ADABalance',
+                                  event,
+                                  user.walletAddress,
+                                )
+                              }
+                            >
+                              Update
+                            </button>
+                          </div>
+
+                          <div>
+                            <label htmlFor="DOGEPrice">DOGE Balance:</label>
+                            <input
+                              type="text"
+                              id="DOGEPrice"
+                              value={
+                                DOGEPrice == 0 ? user.DOGEBalance : DOGEPrice
+                              }
+                              onChange={(e) => setDOGEPrice(e.target.value)}
+                              className="shadow border-1 rounded-lg mt-1 text-center"
+                            />
+                            <button
+                              className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
+                              onClick={() =>
+                                handleBalanceUpdate(
+                                  DOGEPrice,
+                                  'DOGEBalance',
+                                  event,
+                                  user.walletAddress,
+                                )
+                              }
+                            >
+                              Update
+                            </button>
+                          </div>
+
+                          <div>
+                            <label htmlFor="SOLPrice">SOL Balance:</label>
+                            <input
+                              type="text"
+                              id="SOLPrice"
+                              value={SOLPrice == 0 ? user.SOLBalance : SOLPrice}
+                              onChange={(e) => setSOLPrice(e.target.value)}
+                              className="shadow border-1 rounded-lg mt-1 text-center"
+                            />
+                            <button
+                              className="shadow p-3 hover:bg-[#f32de2] rounded-lg"
+                              onClick={() =>
+                                handleBalanceUpdate(
+                                  SOLPrice,
+                                  'SOLBalance',
+                                  event,
+                                  user.walletAddress,
+                                )
+                              }
+                            >
+                              Update
+                            </button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                       <div className="flex flex-col"></div>

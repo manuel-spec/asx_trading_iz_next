@@ -1,14 +1,18 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './src/**/**/*.{js,ts,jsx,tsx}',
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",],
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './src/**/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
+  ],
   darkMode: 'class',
   theme: {
     fontFamily: {
-      'sans': ['ui-sans-serif', 'system-ui'],
+      sans: ['ui-sans-serif', 'system-ui'],
     },
     colors: {
       current: 'currentColor',
@@ -214,9 +218,7 @@ module.exports = {
         'icon-copy': 'url("../images/icon/icon-copy-alt.svg")',
       },
       transitionProperty: { width: 'width', stroke: 'stroke' },
-      borderWidth: {
-        6: '6px',
-      },
+
       boxShadow: {
         default: '0px 8px 13px -3px rgba(0, 0, 0, 0.07)',
         card: '0px 1px 3px rgba(0, 0, 0, 0.12)',
@@ -253,4 +255,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};
