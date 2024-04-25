@@ -31,14 +31,17 @@ const SupportWindow = () => {
           sent_from: localStorage.getItem('id'),
           sent_to: '65dc9dcb42524480b3d04c8a',
         })
-        .then((res) => setMsgList(res['data']['sent_from']));
+        .then((res) => {
+          setMsgList(res['data']['messages']);
+        });
+      console.log(msgList);
     };
 
     getMessages(); // Fetch messages initially
     const intervalId = setInterval(() => {
       getMessages(); // Fetch messages every second
     }, 1000);
-    console.log(msgList);
+
     // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
@@ -62,7 +65,16 @@ const SupportWindow = () => {
         className="mb-4 bg-[#1F2937] rounded-lg"
         style={{ width: '100%', height: '430px', overflowY: 'auto' }}
       >
-        <div className="flex flex-col"></div>
+        <div className="flex flex-col">
+          {msgList.length > 0 &&
+            msgList.map((item, index) => (
+              <div key={index}>
+                <div className="flex flex-col justify-center text-white">
+                  <div>{item['message']}</div>
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
 
       <div className="flex flex-col">
