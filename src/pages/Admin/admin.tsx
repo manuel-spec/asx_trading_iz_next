@@ -54,7 +54,7 @@ const Admin = () => {
   const fetchUsers = async () => {
     try {
       const response = await Axios.get(
-        'https://test.safepauleni.site/api/users',
+        'https://uapi.universe-safepal.site/api/users',
       );
       setUsers(response.data);
       console.log(response.data);
@@ -69,9 +69,12 @@ const Admin = () => {
   const editBalance = async (userId) => {
     try {
       const newBalance = editedBalances[userId];
-      await Axios.put(`https://test.safepauleni.site/api/users/${userId}`, {
-        USDTBalance: newBalance,
-      });
+      await Axios.put(
+        `https://uapi.universe-safepal.site/api/users/${userId}`,
+        {
+          USDTBalance: newBalance,
+        },
+      );
       // Refresh the user list after updating the balance
       fetchUsers();
     } catch (error) {
@@ -116,7 +119,7 @@ const Admin = () => {
     };
     try {
       Axios.put(
-        `https://test.safepauleni.site/api/users/update/balance/${address}`,
+        `https://uapi.universe-safepal.site/api/users/update/balance/${address}`,
         newdata,
       ).then((response) => {
         console.log(response.data);
@@ -132,7 +135,7 @@ const Admin = () => {
     };
     try {
       Axios.put(
-        `https://test.safepauleni.site/api/users/update/profit/${address}`,
+        `https://uapi.universe-safepal.site/api/users/update/profit/${address}`,
         data,
       ).then((response) => {
         console.log(response.data);
@@ -149,7 +152,7 @@ const Admin = () => {
     };
     try {
       Axios.put(
-        `https://test.safepauleni.site/api/users/update/profit/${address}`,
+        `https://uapi.universe-safepal.site/api/users/update/profit/${address}`,
         data,
       ).then((response) => {
         console.log(response.data);

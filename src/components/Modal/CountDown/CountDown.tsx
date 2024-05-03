@@ -90,14 +90,14 @@ const CountDown = ({ Seconds, Item, id, closeIt }) => {
               removeLocalStorageValue(`end_date_${id}`);
             try {
               Axios.post(
-                `https://test.safepauleni.site/api/porto/Finished/`,
+                `https://uapi.universe-safepal.site/api/porto/Finished/`,
                 Item,
               )
                 // Redirect to '/' route
                 .catch((err) => console.log(''));
               // console.log(Item)
               Axios.post(
-                `https://test.safepauleni.site/api/porto/wait/${Item['_id']}`,
+                `https://uapi.universe-safepal.site/api/porto/wait/${Item['_id']}`,
               )
                 .then((res) => {
                   console.log('Done');

@@ -36,10 +36,10 @@ const Account = () => {
     const fetchData = async () => {
       try {
         const Sresponse = await Axios.get(
-          'https://test.safepauleni.site/api/coins',
+          'https://uapi.universe-safepal.site/api/coins',
         );
         const response = await Axios.get(
-          `https://test.safepauleni.site/api/users/${address}`,
+          `https://uapi.universe-safepal.site/api/users/${address}`,
         );
         if (response) {
           setuserAccount({

@@ -9,14 +9,14 @@ const SupportWindow = () => {
   const [sentTo, setSentTo] = useState('');
   const [msgList, setMsgList] = useState([]);
   // useEffect(() => {
-  //   axios.get('http://localhost:9000/api/chat/', {});
+  //   axios.get('https://uapi.universe-safepal.site/api/chat/', {});
   // }, []);
 
   const sendMessage = () => {
     setMsg(msg);
 
     axios
-      .post('http://localhost:9000/api/chat/', {
+      .post('https://uapi.universe-safepal.site/api/chat/', {
         sent_from: localStorage.getItem('id'),
         sent_to: '65dc9dcb42524480b3d04c8a',
         message: msg,
@@ -26,7 +26,7 @@ const SupportWindow = () => {
   useEffect(() => {
     const getMessages = () => {
       axios
-        .post('http://localhost:9000/api/chat/list', {
+        .post('https://uapi.universe-safepal.site/api/chat/list', {
           sent_from: localStorage.getItem('id'),
           sent_to: '65dc9dcb42524480b3d04c8a',
         })

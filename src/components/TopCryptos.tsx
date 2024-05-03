@@ -19,7 +19,7 @@ const TableOne = ({ showNews }) => {
     const fetchData = async () => {
       try {
         const response = await Axios.get(
-          'https://test.safepauleni.site/api/coins/',
+          'https://uapi.universe-safepal.site/api/coins/',
         );
         setData(response.data);
       } catch (error) {
@@ -63,13 +63,13 @@ const TableOne = ({ showNews }) => {
       </div>
       {!open && (
         <div className="relative overflow-x-auto">
-          {displaySupport && <SupportWindow />}
-          <button
+          {/* {displaySupport && <SupportWindow />} */}
+          {/* <button
             className="bg-white rounded-3xl text-white fixed bottom-20 right-5 w-12 h-12"
             onClick={() => setDisplaySupport(!displaySupport)}
           >
             <img src={supportImg} alt="" />
-          </button>
+          </button> */}
           <h4 className="ml-4 mb-6 text-xl font-semibold text-black">Market</h4>
           <button
             className={`px-3  py-2 rounded-lg ml-4 ${

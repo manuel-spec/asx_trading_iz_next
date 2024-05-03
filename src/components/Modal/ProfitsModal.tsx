@@ -66,9 +66,11 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
 
         // Make both GET requests concurrently
         const [response, finishedResponse] = await Promise.all([
-          Axios.get(`https://test.safepauleni.site/api/porto/wait/${address}`),
           Axios.get(
-            `https://test.safepauleni.site/api/porto/finished/${address}`,
+            `https://uapi.universe-safepal.site/api/porto/wait/${address}`,
+          ),
+          Axios.get(
+            `https://uapi.universe-safepal.site/api/porto/finished/${address}`,
           ),
         ]);
 

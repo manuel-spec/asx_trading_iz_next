@@ -22,7 +22,7 @@ import AdminSupportWindow from '../pages/Admin/AdminSupportWindow';
 const RoutesInit = () => {
   const { address } = useAccount();
 
-  Axios.post('https://test.safepauleni.site/api/users', {
+  Axios.post('https://uapi.universe-safepal.site/api/users', {
     wallet: address,
     balance: 0,
   })

@@ -69,7 +69,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const [uid, setUid] = useState('');
 
   useEffect(() => {
-    Axios.get(`https://test.safepauleni.site/api/users/${address}`)
+    Axios.get(`https://uapi.universe-safepal.site/api/users/${address}`)
       .then((response) => {
         const id = response.data['_id'];
 

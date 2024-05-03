@@ -121,7 +121,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
     const fetchData = async () => {
       try {
         const response = await Axios.get(
-          `https://test.safepauleni.site/api/users/${address}`,
+          `https://uapi.universe-safepal.site/api/users/${address}`,
         );
         setUserBalance(response.data['USDTBalance']);
         setDemoUserBalance(response.data['DemoBalance']);
@@ -162,11 +162,11 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
 
     try {
       const response = await Axios.post(
-        'https://test.safepauleni.site/api/porto/wait',
+        'https://uapi.universe-safepal.site/api/porto/wait',
         postData,
       );
       alert('Trade has been Entrusted !');
-      Axios.get(`https://test.safepauleni.site/api/users/${address}`).then(
+      Axios.get(`https://uapi.universe-safepal.site/api/users/${address}`).then(
         async (result) => {
           if (result.data['profit'] == true) {
             let newRealPrice =
@@ -177,7 +177,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
 
             if (accountType == 'Real Account') {
               const update = await Axios.put(
-                `https://test.safepauleni.site/api/users/${address}`,
+                `https://uapi.universe-safepal.site/api/users/${address}`,
                 {
                   newBalance: newRealPrice,
                   cryptoName: name,
@@ -185,7 +185,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
               );
             } else if (accountType == 'Demo Account') {
               const update = await Axios.put(
-                `https://test.safepauleni.site/api/users/demo/${address}`,
+                `https://uapi.universe-safepal.site/api/users/demo/${address}`,
                 {
                   newBalance: newDemoPrice,
                 },
@@ -200,7 +200,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
 
             if (accountType == 'Real Account') {
               const update = await Axios.put(
-                `https://test.safepauleni.site/api/users/${address}`,
+                `https://uapi.universe-safepal.site/api/users/${address}`,
                 {
                   newBalance: newRealPrice,
                   cryptoName: name,
@@ -208,7 +208,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
               );
             } else if (accountType == 'Demo Account') {
               const update = await Axios.put(
-                `https://test.safepauleni.site/api/users/demo/${address}`,
+                `https://uapi.universe-safepal.site/api/users/demo/${address}`,
                 {
                   newBalance: newDemoPrice,
                 },
