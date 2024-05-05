@@ -25,7 +25,7 @@ const style = {
   border: '2px solid #fff',
   boxShadow: 24,
   p: 4,
-  borderRadius: '15px',
+  borderRadius: '25px',
 };
 
 const ProfitModal = ({ visible, onClose, coindata }) => {
@@ -131,29 +131,24 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
     <div onClick={handleOnClose}>
       {openTransactionModal && <TransactionModal />}
       <div
-        className=" mt-15 fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50"
+        className="mt-9 fixed inset-0 flex justify-center items-center z-50"
         onClick={() => onClose()}
         style={{ overflow: 'scroll' }}
       >
         <div
-          className="bg-white h-full p-10 shadow-md space-y-6 w-full flex flex-col"
+          className="bg-white h-full space-y-6 w-full flex flex-col"
           onClick={handleDiv}
         >
-          <div
-            onClick={() => {
-              onClose();
-            }}
-            style={{
-              position: 'fixed',
-              top: '20px',
-              left: '20px',
-              zIndex: '1000',
-            }}
-          >
-            <IoArrowBack />
-          </div>
           <div className="flex flex-row justify-between">
-            <div className="flex justify-center items-center ml-6">
+            <div className="flex justify-center items-center ml-4">
+              <div
+                onClick={() => {
+                  onClose();
+                }}
+                className="mr-3"
+              >
+                <IoArrowBack />
+              </div>
               <div>My Contracts</div>
             </div>
             <div className="flex flex-row">
@@ -204,7 +199,7 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
                         item.accountType === 'Real Account' && (
                           <div
                             key={index}
-                            className="mt-4 flex flex-row justify-between shadow"
+                            className="mt-4 flex flex-row justify-between "
                           >
                             <div className="flex flex-col">
                               <div className="flex flex-col mt-2">
@@ -340,7 +335,7 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
                         item.accountType === 'Demo Account' && (
                           <div
                             key={index}
-                            className="mt-4 flex flex-row justify-between shadow"
+                            className="mt-4 flex flex-row justify-between "
                           >
                             <div className="flex flex-col">
                               <div className="flex flex-col mt-2">
@@ -477,7 +472,7 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
                         item.accountType === 'Demo Account' && (
                           <div
                             key={index}
-                            className="flex flex-row justify-between shadow"
+                            className="flex flex-row justify-between border-b text-sm"
                           >
                             <div className="flex flex-col mt-2">
                               <div className="flex flex-row">
@@ -528,6 +523,7 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
                                   onClose={handleCloseModal}
                                   aria-labelledby="modal-modal-title"
                                   aria-describedby="modal-modal-description"
+                                  className=""
                                 >
                                   <Box sx={style}>
                                     <div>
@@ -536,15 +532,15 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
                                         <IoArrowBack />
                                       </button>
                                     </div>
-                                    <div className="text-center text-xl mb-9">
-                                      My contract
+                                    <div className="text-center  mb-9">
+                                      My Contract
                                     </div>
                                     <Typography
                                       id="modal-modal-description"
                                       sx={{ mt: 2 }}
                                       component={'span'}
                                     >
-                                      <div className="flex flex-col">
+                                      <div className="flex flex-col text-sm ">
                                         <div className="flex flex-row mb-4">
                                           <img
                                             className="coin-logo mr-2"
@@ -643,7 +639,7 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
                           item.accountType === 'Real Account' && (
                             <div
                               key={index}
-                              className=" flex flex-row justify-between shadow"
+                              className=" flex flex-row justify-between border-b mb-3 text-sm"
                             >
                               <div className="flex flex-col mt-2">
                                 <div className="flex flex-row">
@@ -705,14 +701,14 @@ const ProfitModal = ({ visible, onClose, coindata }) => {
                                         </button>
                                       </div>
                                       <div className="text-center text-xl mb-9">
-                                        My contract
+                                        My Contract
                                       </div>
                                       <Typography
                                         id="modal-modal-description"
                                         sx={{ mt: 2 }}
                                         component={'span'}
                                       >
-                                        <div className="flex flex-col">
+                                        <div className="flex flex-col text-sm">
                                           <div className="flex flex-row mb-4">
                                             <img
                                               className="coin-logo mr-2"

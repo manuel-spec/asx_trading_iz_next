@@ -26,7 +26,7 @@ const CoinModal = ({ open, onClose, children, data, name }) => {
               onClick={onClose}
               className="p-2 rounded-lg text-gray-400 bg-white hover:bg-gray-50"
             >
-              <IoArrowBack />
+              <IoArrowBack style={{ color: '#1C2434' }} />
             </button>
           </div>
           <div

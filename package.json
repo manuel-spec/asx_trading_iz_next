@@ -1,5 +1,5 @@
 {
-  "name": "tailadmin-react-free",
+  "name": "universe-safepal",
   "private": true,
   "version": "1.0.5",
   "type": "module",
@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "author": {
-    "name": "TailAdmin",
-    "email": "hello@tailadmin.com",
-    "url": "https://tailadmin.com"
+    "name": "universal",
+    "email": "hello@universe.com",
+    "url": ""
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.0",

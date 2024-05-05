@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 import { CiTimer } from 'react-icons/ci';
-import {
-  useBalance,
-  useAccount,
-  useSendTransaction,
-  useWaitForTransactionReceipt,
-  type BaseError,
-} from 'wagmi';
+import { useBalance, useAccount } from 'wagmi';
 import Axios from 'axios';
-import ProfitModal from './ProfitsModal';
-import Alert from '@mui/material/Alert';
 import { OrbitProgress } from 'react-loading-indicators';
 
 const EntrustModal = ({ visible, onClose, coinDetail }) => {
-  const [successMessageVisible, setSuccessMessageVisible] = useState(false);
-  const [result, setResult] = useState(null);
   const { address } = useAccount();
-
-  const { data, isError, isLoading } = useBalance({
-    address: address,
-  });
-
   const handleBackButtonClick = (event: any) => {
     event.stopPropagation();
     onClose();
@@ -229,14 +214,14 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
     <div onClick={handleOnClose}>
       <div
         id="container"
-        className=" mt-15 fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50"
+        className="fixed inset-0 flex justify-center items-center z-50"
         onClick={handleDiv}
       >
-        <div className="bg-white p-10 rounded-lg shadow-md space-y-6 w-100 ">
+        <div className="bg-white p-10 rounded-lg space-y-6 w-100 ">
           <div className="flex items-center justify-between ">
             <div className="flex flex-col">
               <div>
-                <p className="text-lg font-bold">
+                <p className="text-lg font-semibold">
                   {coinDetail.symbol.toUpperCase()} Coin Delivery
                 </p>
               </div>
@@ -298,7 +283,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
                   id="accountTypeDropdown"
                   value={accountType}
                   onChange={(e) => handleDropdownChange(e, setAccountType)}
-                  className="w-full drop-shadow-lg rounded p-2"
+                  className="w-full border rounded p-2"
                 >
                   {AccountOptions.map((option, index) => (
                     <option key={index} value={option}>
@@ -317,7 +302,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
                       id="deliveryTimeDropdown"
                       value={deliveryTime}
                       onChange={(e) => handleDropdownChange(e, setDeliveryTime)}
-                      className="w-full drop-shadow-lg rounded  py-3 px-5"
+                      className="w-full border rounded  py-3 px-5"
                     >
                       {DeliveryTime.map((option, index) => (
                         <option key={index} value={option}>
@@ -328,7 +313,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
                   </div>
                   <div className="flex flex-row ml-7">
                     <button
-                      className={`w-full  px-5  drop-shadow-lg rounded ${
+                      className={`w-full  px-5  border rounded ${
                         buyTime === 'Buy long'
                           ? 'bg-[#22BF4F] text-white'
                           : 'bg-white'
@@ -338,7 +323,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
                       buy long
                     </button>
                     <button
-                      className={`w-full px-5 drop-shadow-lg rounded ml-4 ${
+                      className={`w-full px-5 border rounded ml-4 ${
                         buyTime === 'Buy short'
                           ? 'bg-[#D71923] text-white'
                           : 'bg-white'
@@ -362,7 +347,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
                     id="priceRangeDropdown"
                     value={priceRange}
                     onChange={(e) => handleDropdownChange(e, setPriceRange)}
-                    className="w-full shadow rounded p-2"
+                    className="w-full border rounded p-2"
                   >
                     {priceRangeOptions.map((option, index) => (
                       <option key={index} value={option}>
@@ -377,7 +362,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
                   <label htmlFor="dropdown">Purchase Price</label>
                 </div>
                 <div className="flex flex-row">
-                  <div className="flex flex-row drop-shadow-lg rounded items-center px-2">
+                  <div className="flex flex-row border rounded items-center px-2">
                     <div>
                       <img
                         className="coin-logo mr-2"
@@ -400,7 +385,7 @@ const EntrustModal = ({ visible, onClose, coinDetail }) => {
                       id="purchasePriceInput"
                       value={purchasePrice}
                       onChange={handlePurchasePriceChange}
-                      className="drop-shadow-lg px-7 rounded py-2 ml-3"
+                      className=" px-7 rounded py-2 ml-3 border"
                       placeholder="100 USDT"
                     />
                   </div>

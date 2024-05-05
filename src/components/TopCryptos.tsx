@@ -62,7 +62,7 @@ const TableOne = ({ showNews }) => {
         )}
       </div>
       {!open && (
-        <div className="relative overflow-x-auto">
+        <div className="">
           {/* {displaySupport && <SupportWindow />} */}
           {/* <button
             className="bg-white rounded-3xl text-white fixed bottom-20 right-5 w-12 h-12"
@@ -109,7 +109,7 @@ const TableOne = ({ showNews }) => {
                     showNews(false);
                   }}
                 >
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex">
+                  <td className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap flex">
                     <img
                       className="coin-logo"
                       src={item.image}
@@ -134,7 +134,7 @@ const TableOne = ({ showNews }) => {
                       </span>
                     </div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="">
                     <img
                       src={`https://www.coingecko.com/coins/${item.image
                         .substring(42, 47)
