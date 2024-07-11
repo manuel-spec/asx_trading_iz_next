@@ -4,6 +4,8 @@ import BtcWallet from '../../images/account/btc/bitcoinWallet.jpg'
 import ethwallet from '../../images/account/eth/ethwallet.jpg'
 import usdt from '../../images/account/usdt/usdtwallet.jpg'
 import Swap from '../Accounts/Swap';
+import { setAutomine } from 'viem/actions';
+import axios from 'axios';
 
 
 
@@ -35,38 +37,69 @@ const DepositFund = ({ walletName, copy, setCopy }) => (
     </div>
 );
 
-const SendCrypto = ({ walletType, sending, setSending, userAccount }) => (
+const SendCrypto = ({ walletType, sending, setSending, userAccount }) => {
+    const [address , setAddress] = useState('')
+    const [amount , setAmount] = useState('')
+    const userId = localStorage.getItem('id')
+    const userAddress = localStorage.getItem('address')
 
-    <div className="mt-4">
-        <div className="mt-4 flex justify-center">
-        </div>
-        <div className="mt-2 flex justify-center flex-col ">
-            <label className='text-sm'>From</label>
-            <div className='flex flex-row'>
-                <div>
-                    <img
-                        className="coin-logo mt-2"
-                        src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${walletType.id}.png`}
-                        loading="lazy"
-                        decoding="async"
-                        width={30}
-                        height={30}
-                        alt={`${walletType.name} logo`}
-                    />
-                </div>
-                <div>
-                    <input type="text" className='px-20 w-full bg-gray-50 shadow text-gray-900 text-sm rounded-lg mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='recivers address' required />
-                </div>
+    const paymentRequest = async () => {
+        if(parseFloat(amount) < 0){
+            alert('Invalid amount')
+            
+        }
+        if(amount > userAccount[walletType.symbol.toUpperCase()+'Balance']){
+            alert('Insufficient balance')   
+        }else{
+            try {
+                const response = await axios.post("http://localhost:9000/api/payment/", {
+                    user : userAddress,
+                    to : address,
+                    amount : amount,
+                    uid: userId,
 
+                });
+                alert('Payment request successful, please contact customer service for confirmation')
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+
+    return (
+
+        <div className="mt-4">
+            <div className="mt-4 flex justify-center">
             </div>
-            <label className='text-sm'>To</label>
-            <input type="number" className='bg-gray-50 shadow text-gray-900 text-sm rounded-lg mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='amount' required />
-
-            <button onClick={() => { setSending(true); alert('payment pending') }} type="button" className="shadow px-7 rounded bg-[#2850E7] text-white">{sending ? 'Pending' : 'Send'}</button>
+            <div className="mt-2 flex justify-center flex-col ">
+                <label className='text-sm'>From</label>
+                <div className='flex flex-row'>
+                    <div>
+                        <img
+                            className="coin-logo mt-2"
+                            src={`${walletType.image}`}
+                            loading="lazy"
+                            decoding="async"
+                            width={30}
+                            height={30}
+                            alt={`${walletType.name} logo`}
+                        />
+                    </div>
+                    <div>
+                        <input value={address} onChange={(e)=>setAddress(e.target.value)} type="text" className='px-20 w-full bg-gray-50 shadow text-gray-900 text-sm rounded-lg mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='recivers address' required />
+                    </div>
+    
+                </div>
+                <label className='text-sm'>To</label>
+                <input value={amount} onChange={(e)=>setAmount(e.target.value)} type="number" className='bg-gray-50 shadow text-gray-900 text-sm rounded-lg mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='amount' required />
+    
+                <button onClick={() => {paymentRequest()}} type="button" className="shadow px-7 rounded bg-[#2850E7] text-white">{sending ? 'Pending' : 'Send'}</button>
+            </div>
         </div>
-    </div>
-);
-
+    );
+    
+}
 // const Swap = async ({ walletType, userAccount }) => {
 
 
