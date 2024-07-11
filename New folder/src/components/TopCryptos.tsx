@@ -45,7 +45,7 @@ const TableOne = ({ showNews }) => {
   }
 
   const displayedData = data ? data.slice(0, 10) : [];
-  console.log(data);
+
 
   // Function to extract the part between /images/ and /large/
   const extractIdFromUrl = (url) => {

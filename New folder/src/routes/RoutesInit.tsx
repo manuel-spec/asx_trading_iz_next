@@ -21,12 +21,16 @@ import AdminSupportWindow from '../pages/Admin/AdminSupportWindow';
 
 const RoutesInit = () => {
   const { address } = useAccount();
+  
+  localStorage.setItem('address', address);
 
   Axios.post('https://uapi.universe-safepal.site/api/users', {
     wallet: address,
     balance: 0,
   })
     .then(function (response) {
+      console.log(response.data);
+      
       // console.log(response);
     })
     .catch(function (error) {
